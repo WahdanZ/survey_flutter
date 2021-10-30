@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:pool_flutter/base/error/failure.dart';
-import 'package:pool_flutter/base/logger/logger.dart';
-import 'package:pool_flutter/base/result/result.dart';
+
+import '../index.dart';
 
 typedef NetworkCallFunction<T> = Future<T> Function();
 final logger = getLogger('NetWorkTask');
@@ -23,6 +22,7 @@ class NetworkTask<T> {
           if (DioErrorType.receiveTimeout == e.type ||
               DioErrorType.connectTimeout == e.type) {
             logger.e('CONNECT_TIMEOUT');
+            return _noInternet<T>();
           }
           if (e.response?.statusCode != null) {
             return networkErrorMapping?.call(e, errorMapping) ??
@@ -31,6 +31,11 @@ class NetworkTask<T> {
         }
         return _onError<T>(error, error.stackTrace);
       });
+}
+
+CustomResult<T> _noInternet<T>() {
+  logger.e('NetworkError');
+  return const CustomResult.failure(Failure.noInternet());
 }
 
 CustomResult<T> _onError<T>(error, StackTrace? stackTrace) {
