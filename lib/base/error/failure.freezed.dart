@@ -173,14 +173,13 @@ class _$_ErrorFailure implements _ErrorFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ErrorFailure &&
-            (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)));
+        (other.runtimeType == runtimeType &&
+            other is _ErrorFailure &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(code);
+  int get hashCode => Object.hash(runtimeType, code);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +270,7 @@ class _$_ErrorFailure implements _ErrorFailure {
 abstract class _ErrorFailure implements Failure {
   const factory _ErrorFailure(String code) = _$_ErrorFailure;
 
-  String get code => throw _privateConstructorUsedError;
+  String get code;
   @JsonKey(ignore: true)
   _$ErrorFailureCopyWith<_ErrorFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -324,14 +323,14 @@ class _$_ApiFailure implements _ApiFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ApiFailure &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+        (other.runtimeType == runtimeType &&
+            other is _ApiFailure &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -422,7 +421,7 @@ class _$_ApiFailure implements _ApiFailure {
 abstract class _ApiFailure implements Failure {
   const factory _ApiFailure({dynamic message}) = _$_ApiFailure;
 
-  dynamic get message => throw _privateConstructorUsedError;
+  dynamic get message;
   @JsonKey(ignore: true)
   _$ApiFailureCopyWith<_ApiFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -476,14 +475,14 @@ class _$_UnAuthorizedFailure implements _UnAuthorizedFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UnAuthorizedFailure &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+        (other.runtimeType == runtimeType &&
+            other is _UnAuthorizedFailure &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -576,7 +575,7 @@ abstract class _UnAuthorizedFailure implements Failure {
   const factory _UnAuthorizedFailure({dynamic message}) =
       _$_UnAuthorizedFailure;
 
-  dynamic get message => throw _privateConstructorUsedError;
+  dynamic get message;
   @JsonKey(ignore: true)
   _$UnAuthorizedFailureCopyWith<_UnAuthorizedFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -629,14 +628,14 @@ class _$_NoInternetFailure implements _NoInternetFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NoInternetFailure &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+        (other.runtimeType == runtimeType &&
+            other is _NoInternetFailure &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -727,7 +726,7 @@ class _$_NoInternetFailure implements _NoInternetFailure {
 abstract class _NoInternetFailure implements Failure {
   const factory _NoInternetFailure({dynamic message}) = _$_NoInternetFailure;
 
-  dynamic get message => throw _privateConstructorUsedError;
+  dynamic get message;
   @JsonKey(ignore: true)
   _$NoInternetFailureCopyWith<_NoInternetFailure> get copyWith =>
       throw _privateConstructorUsedError;
@@ -780,14 +779,14 @@ class _$_UnknownFailure implements _UnknownFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UnknownFailure &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+        (other.runtimeType == runtimeType &&
+            other is _UnknownFailure &&
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -878,7 +877,7 @@ class _$_UnknownFailure implements _UnknownFailure {
 abstract class _UnknownFailure implements Failure {
   const factory _UnknownFailure({dynamic message}) = _$_UnknownFailure;
 
-  dynamic get message => throw _privateConstructorUsedError;
+  dynamic get message;
   @JsonKey(ignore: true)
   _$UnknownFailureCopyWith<_UnknownFailure> get copyWith =>
       throw _privateConstructorUsedError;

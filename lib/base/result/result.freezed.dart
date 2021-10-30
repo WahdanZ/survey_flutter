@@ -140,14 +140,14 @@ class _$_ResultSuccess<T> implements _ResultSuccess<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ResultSuccess<T> &&
-            (identical(other.result, result) ||
-                const DeepCollectionEquality().equals(other.result, result)));
+        (other.runtimeType == runtimeType &&
+            other is _ResultSuccess<T> &&
+            const DeepCollectionEquality().equals(other.result, result));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(result));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +220,7 @@ class _$_ResultSuccess<T> implements _ResultSuccess<T> {
 abstract class _ResultSuccess<T> implements CustomResult<T> {
   const factory _ResultSuccess(T result) = _$_ResultSuccess<T>;
 
-  T get result => throw _privateConstructorUsedError;
+  T get result;
   @JsonKey(ignore: true)
   _$ResultSuccessCopyWith<T, _ResultSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -283,14 +283,13 @@ class _$_ResultFailure<T> implements _ResultFailure<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ResultFailure<T> &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
+        (other.runtimeType == runtimeType &&
+            other is _ResultFailure<T> &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
@@ -363,7 +362,7 @@ class _$_ResultFailure<T> implements _ResultFailure<T> {
 abstract class _ResultFailure<T> implements CustomResult<T> {
   const factory _ResultFailure(Failure error) = _$_ResultFailure<T>;
 
-  Failure get error => throw _privateConstructorUsedError;
+  Failure get error;
   @JsonKey(ignore: true)
   _$ResultFailureCopyWith<T, _ResultFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
