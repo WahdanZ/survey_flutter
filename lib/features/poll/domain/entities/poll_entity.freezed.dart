@@ -13,6 +13,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Poll _$PollFromJson(Map<String, dynamic> json) {
+  return _Poll.fromJson(json);
+}
+
 /// @nodoc
 class _$PollTearOff {
   const _$PollTearOff();
@@ -21,8 +25,8 @@ class _$PollTearOff {
       {required String id,
       required String title,
       required String description,
-      required DateTime startedAt,
-      required DateTime endedAt,
+      required String startedAt,
+      required String endedAt,
       required String imageUrl,
       required String termsAndConditionsUrl,
       required String finishText,
@@ -39,6 +43,10 @@ class _$PollTearOff {
       questions: questions,
     );
   }
+
+  Poll fromJson(Map<String, Object?> json) {
+    return Poll.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -49,13 +57,14 @@ mixin _$Poll {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  DateTime get startedAt => throw _privateConstructorUsedError;
-  DateTime get endedAt => throw _privateConstructorUsedError;
+  String get startedAt => throw _privateConstructorUsedError;
+  String get endedAt => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get termsAndConditionsUrl => throw _privateConstructorUsedError;
   String get finishText => throw _privateConstructorUsedError;
   List<Question> get questions => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PollCopyWith<Poll> get copyWith => throw _privateConstructorUsedError;
 }
@@ -68,8 +77,8 @@ abstract class $PollCopyWith<$Res> {
       {String id,
       String title,
       String description,
-      DateTime startedAt,
-      DateTime endedAt,
+      String startedAt,
+      String endedAt,
       String imageUrl,
       String termsAndConditionsUrl,
       String finishText,
@@ -112,11 +121,11 @@ class _$PollCopyWithImpl<$Res> implements $PollCopyWith<$Res> {
       startedAt: startedAt == freezed
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endedAt: endedAt == freezed
           ? _value.endedAt
           : endedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -146,8 +155,8 @@ abstract class _$PollCopyWith<$Res> implements $PollCopyWith<$Res> {
       {String id,
       String title,
       String description,
-      DateTime startedAt,
-      DateTime endedAt,
+      String startedAt,
+      String endedAt,
       String imageUrl,
       String termsAndConditionsUrl,
       String finishText,
@@ -191,11 +200,11 @@ class __$PollCopyWithImpl<$Res> extends _$PollCopyWithImpl<$Res>
       startedAt: startedAt == freezed
           ? _value.startedAt
           : startedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       endedAt: endedAt == freezed
           ? _value.endedAt
           : endedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as String,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -217,7 +226,7 @@ class __$PollCopyWithImpl<$Res> extends _$PollCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Poll implements _Poll {
   const _$_Poll(
       {required this.id,
@@ -230,6 +239,8 @@ class _$_Poll implements _Poll {
       required this.finishText,
       required this.questions});
 
+  factory _$_Poll.fromJson(Map<String, dynamic> json) => _$$_PollFromJson(json);
+
   @override
   final String id;
   @override
@@ -237,9 +248,9 @@ class _$_Poll implements _Poll {
   @override
   final String description;
   @override
-  final DateTime startedAt;
+  final String startedAt;
   @override
-  final DateTime endedAt;
+  final String endedAt;
   @override
   final String imageUrl;
   @override
@@ -292,6 +303,11 @@ class _$_Poll implements _Poll {
   @override
   _$PollCopyWith<_Poll> get copyWith =>
       __$PollCopyWithImpl<_Poll>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PollToJson(this);
+  }
 }
 
 abstract class _Poll implements Poll {
@@ -299,12 +315,14 @@ abstract class _Poll implements Poll {
       {required String id,
       required String title,
       required String description,
-      required DateTime startedAt,
-      required DateTime endedAt,
+      required String startedAt,
+      required String endedAt,
       required String imageUrl,
       required String termsAndConditionsUrl,
       required String finishText,
       required List<Question> questions}) = _$_Poll;
+
+  factory _Poll.fromJson(Map<String, dynamic> json) = _$_Poll.fromJson;
 
   @override
   String get id;
@@ -313,9 +331,9 @@ abstract class _Poll implements Poll {
   @override
   String get description;
   @override
-  DateTime get startedAt;
+  String get startedAt;
   @override
-  DateTime get endedAt;
+  String get endedAt;
   @override
   String get imageUrl;
   @override
@@ -327,6 +345,10 @@ abstract class _Poll implements Poll {
   @override
   @JsonKey(ignore: true)
   _$PollCopyWith<_Poll> get copyWith => throw _privateConstructorUsedError;
+}
+
+Question _$QuestionFromJson(Map<String, dynamic> json) {
+  return _Question.fromJson(json);
 }
 
 /// @nodoc
@@ -347,6 +369,10 @@ class _$QuestionTearOff {
       answers: answers,
     );
   }
+
+  Question fromJson(Map<String, Object?> json) {
+    return Question.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -360,6 +386,7 @@ mixin _$Question {
   bool get required => throw _privateConstructorUsedError;
   List<Answer>? get answers => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $QuestionCopyWith<Question> get copyWith =>
       throw _privateConstructorUsedError;
@@ -474,7 +501,7 @@ class __$QuestionCopyWithImpl<$Res> extends _$QuestionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Question implements _Question {
   const _$_Question(
       {required this.id,
@@ -482,6 +509,9 @@ class _$_Question implements _Question {
       required this.type,
       required this.required,
       this.answers});
+
+  factory _$_Question.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionFromJson(json);
 
   @override
   final String id;
@@ -520,6 +550,11 @@ class _$_Question implements _Question {
   @override
   _$QuestionCopyWith<_Question> get copyWith =>
       __$QuestionCopyWithImpl<_Question>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QuestionToJson(this);
+  }
 }
 
 abstract class _Question implements Question {
@@ -529,6 +564,8 @@ abstract class _Question implements Question {
       required QuestionType type,
       required bool required,
       List<Answer>? answers}) = _$_Question;
+
+  factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
 
   @override
   String get id;
@@ -546,6 +583,10 @@ abstract class _Question implements Question {
       throw _privateConstructorUsedError;
 }
 
+Answer _$AnswerFromJson(Map<String, dynamic> json) {
+  return _Answer.fromJson(json);
+}
+
 /// @nodoc
 class _$AnswerTearOff {
   const _$AnswerTearOff();
@@ -555,6 +596,10 @@ class _$AnswerTearOff {
       text: text,
       value: value,
     );
+  }
+
+  Answer fromJson(Map<String, Object?> json) {
+    return Answer.fromJson(json);
   }
 }
 
@@ -566,6 +611,7 @@ mixin _$Answer {
   String get text => throw _privateConstructorUsedError;
   int get value => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AnswerCopyWith<Answer> get copyWith => throw _privateConstructorUsedError;
 }
@@ -639,9 +685,12 @@ class __$AnswerCopyWithImpl<$Res> extends _$AnswerCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Answer implements _Answer {
   const _$_Answer({required this.text, required this.value});
+
+  factory _$_Answer.fromJson(Map<String, dynamic> json) =>
+      _$$_AnswerFromJson(json);
 
   @override
   final String text;
@@ -669,10 +718,17 @@ class _$_Answer implements _Answer {
   @override
   _$AnswerCopyWith<_Answer> get copyWith =>
       __$AnswerCopyWithImpl<_Answer>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_AnswerToJson(this);
+  }
 }
 
 abstract class _Answer implements Answer {
   const factory _Answer({required String text, required int value}) = _$_Answer;
+
+  factory _Answer.fromJson(Map<String, dynamic> json) = _$_Answer.fromJson;
 
   @override
   String get text;

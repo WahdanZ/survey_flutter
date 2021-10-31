@@ -8,15 +8,27 @@ import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_
 class PollFormBloc extends FormBloc<String, String> {
   final GetLatestPollUseCase _pollUseCase;
 
-  PollFormBloc(this._pollUseCase) {}
+  PollFormBloc(this._pollUseCase) {
+    emitLoading();
+    _pollUseCase.execute(params: Any()).then((value) => value.when(
+        (result) => _mapPollToFormFields(result),
+        failure: (failure) => _mapFailureToError(failure)));
+  }
 
   @override
-  void onSubmitting() {}
+  void onSubmitting() {
+    emitSuccess(canSubmitAgain: true);
+  }
 
   _mapPollToFormFields(Poll result) {
-    addFieldBloc(step: 0, fieldBloc: SelectFieldBloc(name: "terms"));
+    addFieldBloc(
+        step: 0,
+        fieldBloc: BooleanFieldBloc(
+            name: "terms",
+            extraData: result,
+            validators: [FieldBlocValidators.required]));
 
-    result.questions.forEachIndexed((index, question) {
+    result.questions.toSet().forEachIndexed((index, question) {
       addFieldBloc(step: index + 1, fieldBloc: _mapQuestionsToFiled(question));
     });
     emitLoaded();
@@ -25,14 +37,14 @@ class PollFormBloc extends FormBloc<String, String> {
   FieldBloc _mapQuestionsToFiled(Question question) {
     switch (question.type) {
       case QuestionType.multiple:
-        return MultiSelectFieldBloc(
+        return MultiSelectFieldBloc<Answer, Question>(
             name: question.id,
             validators: [if (question.required) FieldBlocValidators.required],
             extraData: question,
             items: question.answers ?? []);
       case QuestionType.single:
       case QuestionType.rating:
-        return SelectFieldBloc(
+        return SelectFieldBloc<Answer, Question>(
             name: question.id,
             validators: [if (question.required) FieldBlocValidators.required],
             extraData: question,
@@ -54,10 +66,5 @@ class PollFormBloc extends FormBloc<String, String> {
             unknown: (_) => "Unknown Error"));
   }
 
-  loadPoll() {
-    emitLoading();
-    _pollUseCase.execute(params: Any()).then((value) => value.when(
-        (result) => _mapPollToFormFields(result),
-        failure: (failure) => _mapFailureToError(failure)));
-  }
+  loadPoll() {}
 }
