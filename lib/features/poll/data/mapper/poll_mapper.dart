@@ -9,8 +9,17 @@ class PollMapper extends Mapper<PollModel, Poll> {
   PollMapper(this._questionMapper);
   @override
   Poll mapFromModel(PollModel type) {
-    // TODO: implement mapFromModel
-    throw UnimplementedError();
+    return Poll(
+        id: type.id ?? "",
+        title: type.title ?? "",
+        description: type.description ?? "",
+        startedAt: type.startedAt ?? "",
+        endedAt: type.endedAt ?? "",
+        imageUrl: type.imageUrl ?? "",
+        termsAndConditionsUrl: type.imageUrl ?? "",
+        finishText: type.finishText ?? "",
+        questions:
+            type.questions?.map(_questionMapper.mapFromModel).toList() ?? []);
   }
 
   @override

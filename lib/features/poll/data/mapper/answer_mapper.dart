@@ -13,7 +13,9 @@ class AnswerMapper extends Mapper<AnswersModel, Answer> {
 
   @override
   Answer mapFromModel(AnswersModel type) {
-    // TODO: implement mapFromModel
-    throw UnimplementedError();
+    return Answer(
+      text: type.text ?? "",
+      value: type.value ?? 0,
+    );
   }
 }

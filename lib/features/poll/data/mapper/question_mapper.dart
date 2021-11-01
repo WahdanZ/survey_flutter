@@ -20,7 +20,11 @@ class QuestionMapper extends Mapper<QuestionsModel, Question> {
 
   @override
   Question mapFromModel(QuestionsModel type) {
-    // TODO: implement mapFromModel
-    throw UnimplementedError();
+    return Question(
+        type: _questionTypeMap.mapFromModel(type.type ?? ""),
+        id: type.id ?? "",
+        text: type.text ?? "",
+        required: type.required ?? false,
+        answers: type.answers?.map(_answerMapper.mapFromModel).toList());
   }
 }
