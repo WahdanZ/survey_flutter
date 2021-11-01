@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:poll_flutter/features/poll/data/models/poll.dart';
+import 'package:poll_flutter/features/poll/data/models/poll_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'poll_client.g.dart';

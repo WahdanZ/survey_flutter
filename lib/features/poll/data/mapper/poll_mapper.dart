@@ -1,6 +1,6 @@
 import 'package:poll_flutter/base/mapper/mapper.dart';
 import 'package:poll_flutter/features/poll/data/mapper/question_mapper.dart';
-import 'package:poll_flutter/features/poll/data/models/poll.dart';
+import 'package:poll_flutter/features/poll/data/models/poll_model.dart';
 import 'package:poll_flutter/features/poll/index.dart';
 
 class PollMapper extends Mapper<PollModel, Poll> {
