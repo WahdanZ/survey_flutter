@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:poll_flutter/base/index.dart';
+import 'package:poll_flutter/base/remote/dio_netowrk_task.dart';
 import 'package:test/test.dart';
 
 class FakeTask extends Mock {
@@ -17,7 +18,8 @@ void main() {
       fakeTask = FakeTask();
 
       when(() => fakeTask.getFakeData()).thenAnswer((_) async => "Okay");
-      final result = await NetworkTask(() => fakeTask.getFakeData()).execute();
+      final result =
+          await DioNetworkTask(() => fakeTask.getFakeData()).execute();
       expect(result, CustomResult("Okay"));
     });
     test('Return  Failure of No Internet connection if connection timeout',
@@ -29,8 +31,11 @@ void main() {
               requestOptions: RequestOptions(path: ''),
               type: DioErrorType.connectTimeout)));
 
-      final result = await NetworkTask(() => fakeTask.getFakeData()).execute();
-      expect(result, CustomResult.failure(Failure.noInternet()));
+      final CustomResult<String> result =
+          await DioNetworkTask(() => fakeTask.getFakeData()).execute();
+      final CustomResult<String> expected =
+          CustomResult.failure(Failure.noInternet());
+      expect(result, expected);
     });
 
     test('Return  Failure of UnAuthorized if api return 41', () async {
@@ -43,8 +48,12 @@ void main() {
                   requestOptions: RequestOptions(path: ''), statusCode: 401),
               type: DioErrorType.response)));
 
-      final result = await NetworkTask(() => fakeTask.getFakeData()).execute();
-      expect(result, CustomResult.failure(Failure.unAuthorized()));
+      final result =
+          await DioNetworkTask(() => fakeTask.getFakeData()).execute();
+      final CustomResult<String> expected =
+          CustomResult.failure(Failure.unAuthorized());
+
+      expect(result, expected);
     });
   });
 }
