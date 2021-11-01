@@ -9,7 +9,7 @@ import 'package:poll_flutter/features/poll/index.dart';
 class PollRepositoryImp extends PollRepository {
   final PollRemoteDataSource _remoteDataSource;
   final PollMapper _mapper;
-  PollRepositoryImp(this._remoteDataSource, this._mapper);
+  PollRepositoryImp(@Named("RestApi") this._remoteDataSource, this._mapper);
   Future<CustomResult<Poll>> getLatestPoll() async {
     return _remoteDataSource
         .getLatestPoll()

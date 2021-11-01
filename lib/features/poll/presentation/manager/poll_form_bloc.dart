@@ -5,22 +5,20 @@ import 'package:poll_flutter/base/error/failure.dart';
 import 'package:poll_flutter/features/poll/domain/entities/poll_entity.dart';
 import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_cast.dart';
 
-class PollFormBloc extends FormBloc<String, String> {
+class PollFormBloc extends FormBloc<Poll?, String> {
   final GetLatestPollUseCase _pollUseCase;
 
-  PollFormBloc(this._pollUseCase) {
-    emitLoading();
-    _pollUseCase.execute(params: Any()).then((value) => value.when(
-        (result) => _mapPollToFormFields(result),
-        failure: (failure) => _mapFailureToError(failure)));
-  }
+  late Poll poll;
+
+  PollFormBloc(this._pollUseCase) {}
 
   @override
   void onSubmitting() {
-    emitSuccess(canSubmitAgain: true);
+    emitSuccess(canSubmitAgain: true, successResponse: poll);
   }
 
   _mapPollToFormFields(Poll result) {
+    this.poll = result;
     addFieldBloc(
         step: 0,
         fieldBloc: BooleanFieldBloc(
@@ -66,5 +64,10 @@ class PollFormBloc extends FormBloc<String, String> {
             unknown: (_) => "Unknown Error"));
   }
 
-  loadPoll() {}
+  loadPoll() {
+    emitLoading();
+    _pollUseCase.execute(params: Any()).then((value) => value.when(
+        (result) => _mapPollToFormFields(result),
+        failure: (failure) => _mapFailureToError(failure)));
+  }
 }

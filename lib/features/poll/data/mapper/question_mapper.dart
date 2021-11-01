@@ -6,7 +6,7 @@ import 'package:poll_flutter/features/poll/domain/entities/index.dart';
 
 class QuestionMapper extends Mapper<QuestionModel, Question> {
   final AnswerMapper _answerMapper;
-  final QuestionTypeMap _questionTypeMap;
+  final QuestionTypeMapper _questionTypeMap;
   QuestionMapper(this._answerMapper, this._questionTypeMap);
   @override
   QuestionModel mapFromEntity(Question type) {

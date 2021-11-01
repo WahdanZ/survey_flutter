@@ -8,7 +8,7 @@ import 'package:poll_flutter/features/poll/data/models/poll_model.dart';
 @Injectable(
   as: PollRemoteDataSource,
 )
-@Named("Api")
+@Named("RestApi")
 class PollApiRemoteDataSource extends PollRemoteDataSource {
   final PollClient _client;
 

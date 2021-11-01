@@ -30,15 +30,13 @@ class QuestionWidget extends StatelessWidget {
             ),
           ),
           if (fieldBloc is TextFieldBloc<Question>)
-            Expanded(
-              child: TextFieldBlocBuilder(
-                textFieldBloc: fieldBloc as TextFieldBloc,
-                keyboardType: TextInputType.multiline,
-                maxLengthEnforced: MaxLengthEnforcement.enforced,
-                maxLines: 15,
-                decoration: InputDecoration(
-                  labelText: '',
-                ),
+            TextFieldBlocBuilder(
+              textFieldBloc: fieldBloc as TextFieldBloc,
+              keyboardType: TextInputType.multiline,
+              maxLengthEnforced: MaxLengthEnforcement.enforced,
+              maxLines: 15,
+              decoration: InputDecoration(
+                labelText: '',
               ),
             ),
           if (fieldBloc is SelectFieldBloc)

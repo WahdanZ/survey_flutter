@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:poll_flutter/base/index.dart';
 import 'package:poll_flutter/features/poll/domain/repositories/poll_repository.dart';
 import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_cast.dart';
+import 'package:poll_flutter/features/poll/index.dart';
 import 'package:poll_flutter/features/poll/presentation/manager/poll_form_bloc.dart';
 import 'package:test/test.dart';
 
@@ -21,7 +22,7 @@ void main() {
       mockPollRepository = MockPollRepository();
     });
 
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
         'When load poll number of form filed should be number'
         ' of question + form file for terms and conditions  ',
         build: () {
@@ -35,7 +36,7 @@ void main() {
           expect(formBloc.state.fieldBlocs()?.length,
               mockPoll1.questions.length + 1);
         });
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
         'When question is Single Form Filed should be SelectFieldBloc',
         build: () {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
@@ -51,7 +52,7 @@ void main() {
               [isA<SelectFieldBloc>(), isA<SelectFieldBloc>()]);
         });
 
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
         'When question is Multi Form Filed should be MutliSelectFieldBloc',
         build: () {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
@@ -66,7 +67,7 @@ void main() {
           expect(formBloc.state.fieldBlocs()?.values,
               [isA<SelectFieldBloc>(), isA<MultiSelectFieldBloc>()]);
         });
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
         'When question is Text Form Filed should be TextFieldBloc',
         build: () {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
@@ -81,7 +82,7 @@ void main() {
           expect(formBloc.state.fieldBlocs()?.values,
               [isA<SelectFieldBloc>(), isA<TextFieldBloc>()]);
         });
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
       'Emit Failure with No Internet Connection if there is no Internet Connection ',
       build: () {
         when(() => mockPollRepository.getLatestPoll()).thenAnswer(
@@ -100,7 +101,7 @@ void main() {
       ],
     );
 
-    blocTest<PollFormBloc, FormBlocState<String, String>>(
+    blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
       'Emit Failure with Un Authorized message if user not allow to see this poll ',
       build: () {
         when(() => mockPollRepository.getLatestPoll()).thenAnswer(

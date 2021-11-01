@@ -19,7 +19,7 @@ void main() {
     setUp(() {
       pollMockRemoteDataSource = getIt();
       pollRepository = PollRepositoryImp(pollMockRemoteDataSource,
-          PollMapper(QuestionMapper(AnswerMapper(), QuestionTypeMap())));
+          PollMapper(QuestionMapper(AnswerMapper(), QuestionTypeMapper())));
     });
     test('get Poll successfully ', () async {
       when(() => pollMockRemoteDataSource.getLatestPoll())
