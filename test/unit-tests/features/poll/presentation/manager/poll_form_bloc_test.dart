@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:poll_flutter/base/index.dart';
 import 'package:poll_flutter/features/poll/domain/repositories/poll_repository.dart';
 import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_cast.dart';
+import 'package:poll_flutter/features/poll/domain/use_cases/submit_poll_use_case.dart';
 import 'package:poll_flutter/features/poll/index.dart';
 import 'package:poll_flutter/features/poll/presentation/manager/poll_form_bloc.dart';
 import 'package:test/test.dart';
@@ -29,7 +30,8 @@ void main() {
           when(() => mockPollRepository.getLatestPoll())
               .thenAnswer((_) async => CustomResult(mockPoll1));
 
-          return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+          return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+              SubmitPollUseCase(mockPollRepository));
         },
         act: (formBloc) => formBloc.loadPoll(),
         verify: (formBloc) {
@@ -42,14 +44,15 @@ void main() {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
               (_) async => CustomResult(mockPollWithSingleQuestionType));
 
-          return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+          return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+              SubmitPollUseCase(mockPollRepository));
         },
         act: (formBloc) => formBloc.loadPoll(),
         verify: (formBloc) {
           expect(formBloc.state.fieldBlocs()?.length,
               mockPoll1.questions.length + 1);
           expect(formBloc.state.fieldBlocs()?.values,
-              [isA<SelectFieldBloc>(), isA<SelectFieldBloc>()]);
+              [isA<BooleanFieldBloc>(), isA<SelectFieldBloc>()]);
         });
 
     blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
@@ -58,14 +61,15 @@ void main() {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
               (_) async => CustomResult(mockPollWithMultipleQuestionType));
 
-          return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+          return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+              SubmitPollUseCase(mockPollRepository));
         },
         act: (formBloc) => formBloc.loadPoll(),
         verify: (formBloc) {
           expect(formBloc.state.fieldBlocs()?.length,
               mockPoll1.questions.length + 1);
           expect(formBloc.state.fieldBlocs()?.values,
-              [isA<SelectFieldBloc>(), isA<MultiSelectFieldBloc>()]);
+              [isA<BooleanFieldBloc>(), isA<MultiSelectFieldBloc>()]);
         });
     blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
         'When question is Text Form Filed should be TextFieldBloc',
@@ -73,14 +77,15 @@ void main() {
           when(() => mockPollRepository.getLatestPoll()).thenAnswer(
               (_) async => CustomResult(mockPollWithTextQuestionType));
 
-          return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+          return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+              SubmitPollUseCase(mockPollRepository));
         },
         act: (formBloc) => formBloc.loadPoll(),
         verify: (formBloc) {
           expect(formBloc.state.fieldBlocs()?.length,
               mockPoll1.questions.length + 1);
           expect(formBloc.state.fieldBlocs()?.values,
-              [isA<SelectFieldBloc>(), isA<TextFieldBloc>()]);
+              [isA<BooleanFieldBloc>(), isA<TextFieldBloc>()]);
         });
     blocTest<PollFormBloc, FormBlocState<Poll?, String>>(
       'Emit Failure with No Internet Connection if there is no Internet Connection ',
@@ -88,7 +93,8 @@ void main() {
         when(() => mockPollRepository.getLatestPoll()).thenAnswer(
             (_) async => CustomResult.failure(Failure.noInternet()));
 
-        return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+        return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+            SubmitPollUseCase(mockPollRepository));
       },
       act: (formBloc) => formBloc.loadPoll(),
       verify: (formBloc) {
@@ -107,7 +113,8 @@ void main() {
         when(() => mockPollRepository.getLatestPoll()).thenAnswer(
             (_) async => CustomResult.failure(Failure.unAuthorized()));
 
-        return PollFormBloc(GetLatestPollUseCase(mockPollRepository));
+        return PollFormBloc(GetLatestPollUseCase(mockPollRepository),
+            SubmitPollUseCase(mockPollRepository));
       },
       act: (formBloc) => formBloc.loadPoll(),
       expect: () => [
