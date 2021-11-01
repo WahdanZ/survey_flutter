@@ -16,7 +16,7 @@ class PollMapper extends Mapper<PollModel, Poll> {
         startedAt: type.startedAt ?? "",
         endedAt: type.endedAt ?? "",
         imageUrl: type.imageUrl ?? "",
-        termsAndConditionsUrl: type.imageUrl ?? "",
+        termsAndConditionsUrl: type.termsAndConditionsUrl ?? "",
         finishText: type.finishText ?? "",
         questions:
             type.questions?.map(_questionMapper.mapFromModel).toList() ?? []);
@@ -31,7 +31,7 @@ class PollMapper extends Mapper<PollModel, Poll> {
         startedAt: type.startedAt,
         endedAt: type.endedAt,
         imageUrl: type.imageUrl,
-        termsAndConditionsUrl: type.imageUrl,
+        termsAndConditionsUrl: type.termsAndConditionsUrl,
         finishText: type.finishText,
         questions: type.questions.map(_questionMapper.mapFromEntity).toList());
   }

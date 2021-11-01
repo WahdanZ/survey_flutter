@@ -35,7 +35,7 @@ void main() {
       final res = await pollApiRemoteDataSource.getLatestPoll();
 
       res.maybeWhen((result) {
-        expect(expectedModel, result);
+        expect(mockModel, result);
       }, orElse: () => throw "failed to get poll");
     });
     test('get Poll with 404 error ', () async {

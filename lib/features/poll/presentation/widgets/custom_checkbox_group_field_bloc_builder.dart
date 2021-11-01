@@ -114,7 +114,6 @@ class CustomCheckboxGroupFieldBlocBuilder<Value> extends StatelessWidget {
       physics: ClampingScrollPhysics(),
       itemCount: state.items.length,
       itemBuilder: (context, index) {
-        final item = state.items[index];
         return InputDecorator(
           decoration: Style.inputDecorationWithoutBorder.copyWith(
             prefixIcon:
