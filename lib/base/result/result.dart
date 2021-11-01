@@ -18,8 +18,8 @@ extension ExtenCustomResult on CustomResult {
   bool isSuccessful() => runtimeType == _ResultSuccess;
 }
 
-extension FutureEx<T> on Future<CustomResult<T?>> {
-  Future<CustomResult<B>> map<B>(B Function(T? t) f) => then((value) {
+extension FutureEx<T> on Future<CustomResult<T>> {
+  Future<CustomResult<B>> map<B>(B Function(T t) f) => then((value) {
         return value.map(
           (value) => CustomResult(f(value.result)),
           failure: (failure) => CustomResult.failure(failure.error),

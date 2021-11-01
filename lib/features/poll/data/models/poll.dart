@@ -9,7 +9,7 @@
 /// questions : [{"id":"n0aq3sqRU7","text":"In the past week, which emotion did you feel most often?","type":"multiple","required":true,"answers":[{"text":"Happy","value":0},{"text":"Excited","value":1},{"text":"Restless","value":2},{"text":"Sad","value":3},{"text":"Worried","value":4},{"text":"Angry","value":5}]},{"id":"RZYRrFYzCc","text":"Does this emotion affect your temper during the rest of the day?","type":"rating","required":true,"answers":[{"text":"Strongly disagree","value":0},{"text":"Disagree","value":1},{"text":"Neurtral","value":2},{"text":"Aggreed","value":3},{"text":"Strongly Agree","value":4}]},{"id":"RZYRrFYzCc","text":"Does this emotion affect your temper during the rest of the day?","type":"rating","required":true,"answers":[{"text":"Strongly disagree","value":0},{"text":"Disagree","value":1},{"text":"Neurtral","value":2},{"text":"Aggreed","value":3},{"text":"Strongly Agree","value":4}]},{"id":"4J456QofoL","text":"What event or events caused you to feel that emotion most frequently?","type":"text","required":true},{"id":"RZYRrFYzCc","text":"Does this emotion affect your temper during the rest of the day?","type":"rating","required":true,"answers":[{"text":"Strongly disagree","value":0},{"text":"Disagree","value":1},{"text":"Neurtral","value":2},{"text":"Aggreed","value":3},{"text":"Strongly Agree","value":4}]},{"id":"ZghdtdeD","text":"When do you normally use the Healy?","type":"multiple","required":true,"answers":[{"text":"In the morning","value":0},{"text":"In the evening","value":1},{"text":"Before badtime","value":2},{"text":"After an emotional situation","value":3},{"text":"At work","value":4},{"text":"For sport","value":5}]}]
 
 class PollModel {
-  Poll({
+  PollModel({
     String? id,
     String? title,
     String? description,
@@ -146,7 +146,7 @@ class QuestionsModel {
 /// value : 0
 
 class AnswersModel {
-  Answers({
+  AnswersModel({
     String? text,
     int? value,
   }) {
