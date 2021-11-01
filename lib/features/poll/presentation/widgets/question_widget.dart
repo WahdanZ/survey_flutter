@@ -29,6 +29,9 @@ class QuestionWidget extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
+          SizedBox(
+            height: 30,
+          ),
           if (fieldBloc is TextFieldBloc<Question>)
             TextFieldBlocBuilder(
               textFieldBloc: fieldBloc as TextFieldBloc,

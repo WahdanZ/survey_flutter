@@ -34,7 +34,7 @@ Logger getLogger([String? className]) {
   );
 }
 
-final logy = Logger(
+final logger = Logger(
   printer: PrettyPrinter(
       methodCount: 2, // number of method calls to be displayed
       errorMethodCount: 8, // number of method calls if stacktrace is provided

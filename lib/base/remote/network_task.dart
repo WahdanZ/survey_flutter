@@ -3,9 +3,10 @@ import 'package:dio/dio.dart';
 import '../index.dart';
 
 typedef NetworkCallFunction<T> = Future<T> Function();
-final logger = getLogger('NetWorkTask');
 
 abstract class NetworkTask<T> {
+  final logger = getLogger('NetWorkTask');
+
   NetworkTask(this._task);
 
   final FutureTask<T> _task;

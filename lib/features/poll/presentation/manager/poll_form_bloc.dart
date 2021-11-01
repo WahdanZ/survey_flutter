@@ -6,31 +6,36 @@ import 'package:poll_flutter/base/index.dart';
 import 'package:poll_flutter/features/poll/domain/entities/index.dart';
 import 'package:poll_flutter/features/poll/domain/entities/poll_entity.dart';
 import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_cast.dart';
+import 'package:poll_flutter/features/poll/domain/use_cases/submit_poll_use_case.dart';
 
 class PollFormBloc extends FormBloc<Poll?, String> {
   final GetLatestPollUseCase _pollUseCase;
+  final SubmitPollUseCase _submitPollUseCase;
 
   late Poll poll;
 
-  PollFormBloc(this._pollUseCase) {}
+  PollFormBloc(this._pollUseCase, this._submitPollUseCase) {}
 
   @override
   void onSubmitting() {
+    logger.d(state.toJson());
+
     if (state.isLastStep) {
       final result = state
           .toJson()
           .entries
           .skip(1)
-          .map((e) => PollAnswer(questionId: e.key, value: e.value.toString()));
-      logger.i(result);
+          .map((e) => PollAnswer(questionId: e.key, value: e.value.toString()))
+          .toList();
+      _submitPollUseCase.execute(
+          params: SubmitPollUseCaseParm(poll.id, result));
       emitSuccess(canSubmitAgain: true, successResponse: poll);
+      clear();
     } else {
       emitSuccess(
         canSubmitAgain: true,
       );
     }
-
-    logger.d(state.toJson());
   }
 
   _mapPollToFormFields(Poll result) {

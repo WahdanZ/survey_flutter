@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:poll_flutter/features/poll/index.dart';
+import 'package:poll_flutter/features/poll/presentation/pages/index.dart';
 
 class SuccessPage extends StatelessWidget {
   final Poll? poll;
@@ -43,7 +44,10 @@ class SuccessPage extends StatelessWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
                     )),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => PollPage()));
+                }),
           )
         ],
       ),

@@ -14,6 +14,7 @@ class PollRepositoryImp extends PollRepository {
   PollRepositoryImp(@Named("RestApi") this._remoteDataSource, this._mapper,
       this._pollAnswerMapper);
   Future<CustomResult<Poll>> getLatestPoll() async {
+    logger.d("Getting LatestPoll");
     return _remoteDataSource
         .getLatestPoll()
         .map((t) => _mapper.mapFromModel(t));
@@ -22,6 +23,8 @@ class PollRepositoryImp extends PollRepository {
   @override
   Future<CustomResult<Object>> submitPoll(
       String pollId, List<PollAnswer> list) {
+    logger.d("Submitting pollId: $pollId with answers $list");
+
     return _remoteDataSource.submitPoll(
         pollId, list.map(_pollAnswerMapper.mapFromEntity).toList());
   }

@@ -17,13 +17,14 @@ class PollApiRemoteDataSource extends PollRemoteDataSource {
   PollApiRemoteDataSource(this._client);
   @override
   Future<CustomResult<PollModel>> getLatestPoll() {
+    logger.d("Getting LatestPoll");
     return DioNetworkTask(() => _client.getPoll()).execute();
   }
 
   @override
   Future<CustomResult<Object>> submitPoll(
       String pollId, List<PollAnswerModel> list) async {
-    logger.d("PollId $pollId : $list");
+    logger.d("Submitting pollId: $pollId with answers $list");
     return CustomResult("Okay");
   }
 }
