@@ -33,7 +33,7 @@ class _PollPageState extends State<PollPage> {
       child: FormBlocListener<PollFormBloc, Poll?, String>(
         onSuccess: (context, state) {
           if (state.stepCompleted == state.lastStep) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
+            Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => SuccessPage(poll: state.successResponse)));
           }
         },

@@ -14,10 +14,9 @@ class SuccessPage extends StatelessWidget {
           title: Text(
             "Survey Completed",
             style: GoogleFonts.openSans(
-              textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 22,
+              fontSize: 16,
               color: Colors.black,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
             ),
           )),
       body: Column(

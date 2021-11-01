@@ -18,8 +18,8 @@ abstract class UseCase<T, P extends Params> {
 abstract class UseCaseResult<T, P extends Params> {
   /// Builds the [Future]. [Params] is required
   /// by the [UseCase] to retrieve the appropriate data from the repository
-  Future<CustomResult<T>> buildUseCase(P? params);
-  Future<CustomResult<T>> execute({P? params}) {
+  Future<CustomResult<T>> buildUseCase(P params);
+  Future<CustomResult<T>> execute({required P params}) {
     return buildUseCase(params);
   }
 }

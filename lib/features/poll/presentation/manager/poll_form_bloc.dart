@@ -2,6 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:form_bloc/form_bloc.dart';
 import 'package:poll_flutter/base/domain/index.dart';
 import 'package:poll_flutter/base/error/failure.dart';
+import 'package:poll_flutter/base/index.dart';
+import 'package:poll_flutter/features/poll/domain/entities/index.dart';
 import 'package:poll_flutter/features/poll/domain/entities/poll_entity.dart';
 import 'package:poll_flutter/features/poll/domain/use_cases/get_latest_poll_use_cast.dart';
 
@@ -14,7 +16,21 @@ class PollFormBloc extends FormBloc<Poll?, String> {
 
   @override
   void onSubmitting() {
-    emitSuccess(canSubmitAgain: true, successResponse: poll);
+    if (state.isLastStep) {
+      final result = state
+          .toJson()
+          .entries
+          .skip(1)
+          .map((e) => PollAnswer(questionId: e.key, value: e.value.toString()));
+      logger.i(result);
+      emitSuccess(canSubmitAgain: true, successResponse: poll);
+    } else {
+      emitSuccess(
+        canSubmitAgain: true,
+      );
+    }
+
+    logger.d(state.toJson());
   }
 
   _mapPollToFormFields(Poll result) {
@@ -39,14 +55,16 @@ class PollFormBloc extends FormBloc<Poll?, String> {
             name: question.id,
             validators: [if (question.required) FieldBlocValidators.required],
             extraData: question,
-            items: question.answers ?? []);
+            items: question.answers ?? [],
+            toJson: (items) => items.map((e) => e.value).join(","));
       case QuestionType.single:
       case QuestionType.rating:
         return SelectFieldBloc<Answer, Question>(
             name: question.id,
             validators: [if (question.required) FieldBlocValidators.required],
             extraData: question,
-            items: question.answers ?? []);
+            items: question.answers ?? [],
+            toJson: (value) => value?.value ?? "");
       case QuestionType.text:
         return TextFieldBloc(
             name: question.id,

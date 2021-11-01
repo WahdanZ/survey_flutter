@@ -1,6 +1,7 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:poll_flutter/base/index.dart';
 import 'package:poll_flutter/features/poll/data/data_sources/remote/poll_remote_data_source.dart';
+import 'package:poll_flutter/features/poll/data/mapper/poll_answer_mapper.dart';
 import 'package:poll_flutter/features/poll/data/repositories/poll_repository.dart';
 import 'package:poll_flutter/features/poll/domain/index.dart';
 import 'package:poll_flutter/features/poll/index.dart';
@@ -18,8 +19,10 @@ void main() {
     late PollRepository pollRepository;
     setUp(() {
       pollMockRemoteDataSource = getIt();
-      pollRepository = PollRepositoryImp(pollMockRemoteDataSource,
-          PollMapper(QuestionMapper(AnswerMapper(), QuestionTypeMapper())));
+      pollRepository = PollRepositoryImp(
+          pollMockRemoteDataSource,
+          PollMapper(QuestionMapper(AnswerMapper(), QuestionTypeMapper())),
+          PollAnswerMapper());
     });
     test('get Poll successfully ', () async {
       when(() => pollMockRemoteDataSource.getLatestPoll())
