@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:poll_flutter/base/index.dart';
@@ -15,6 +16,7 @@ Future<void> configureDependencies({String? environment}) async {
   await $initGetIt(getIt, environmentFilter: NoEnvOrContains(environment));
   if (environment == Environment.test) {
     logger.d("testing env");
+    inject<Dio>(instanceName: "dio_client").interceptors.requestLock.lock();
     getIt.allowReassignment = true;
   }
 }

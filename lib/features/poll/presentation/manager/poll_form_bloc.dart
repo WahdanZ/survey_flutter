@@ -47,13 +47,14 @@ class PollFormBloc extends FormBloc<Poll?, String> {
             extraData: result,
             validators: [FieldBlocValidators.required]));
 
-    result.questions.toSet().forEachIndexed((index, question) {
+    result.questions.forEachIndexed((index, question) {
       addFieldBloc(step: index + 1, fieldBloc: _mapQuestionsToFiled(question));
     });
     emitLoaded();
   }
 
   FieldBloc _mapQuestionsToFiled(Question question) {
+    logger.d(question);
     switch (question.type) {
       case QuestionType.multiple:
         return MultiSelectFieldBloc<Answer, Question>(

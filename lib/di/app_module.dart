@@ -7,8 +7,8 @@ abstract class AppModule {
   @Named('base_url')
   @prod
   @dev
-  String get baseUrl =>
-      const String.fromEnvironment('base_url', defaultValue: "");
+  String get baseUrl => const String.fromEnvironment('base_url',
+      defaultValue: "https://firebasestorage.googleapis.com");
   @LazySingleton()
   @Named('dio_client')
   Dio get dio =>

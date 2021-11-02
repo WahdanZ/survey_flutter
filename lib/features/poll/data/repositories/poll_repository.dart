@@ -15,6 +15,7 @@ class PollRepositoryImp extends PollRepository {
       this._pollAnswerMapper);
   Future<CustomResult<Poll>> getLatestPoll() async {
     logger.d("Getting LatestPoll");
+
     return _remoteDataSource
         .getLatestPoll()
         .map((t) => _mapper.mapFromModel(t));

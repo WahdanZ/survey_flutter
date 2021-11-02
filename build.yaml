@@ -1,5 +1,12 @@
 targets:
   $default:
+    sources:
+      - lib/**
+      - pubspec.*
+      - $package$
+      # Allows the code generator to target files outside of the lib folder
+      - integration_test/**.dart
+      - test/**.dart
     builders:
       injectable_generator:injectable_builder:
         options:

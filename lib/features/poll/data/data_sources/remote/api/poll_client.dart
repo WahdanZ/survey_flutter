@@ -12,7 +12,7 @@ abstract class PollClient {
   factory PollClient(@Named('dio_client') Dio dio,
       {@Named('base_url') String baseUrl}) = _PollClient;
 
-  @GET('https://firebasestorage.googleapis.com/v0/b/healy-identity.appspot.com/'
+  @GET('/v0/b/healy-identity.appspot.com/'
       'o/polls%2FvAJax5hdbF.json'
       '?alt=media&token=48258028-2f77-493d-9e9d-8ca322b3068a')
   Future<PollModel> getPoll();

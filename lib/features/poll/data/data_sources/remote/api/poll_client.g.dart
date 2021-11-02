@@ -23,7 +23,7 @@ class _PollClient implements PollClient {
         PollModel>(Options(
             method: 'GET', headers: _headers, extra: _extra)
         .compose(_dio.options,
-            'https://firebasestorage.googleapis.com/v0/b/healy-identity.appspot.com/o/polls%2FvAJax5hdbF.json?alt=media&token=48258028-2f77-493d-9e9d-8ca322b3068a',
+            '/v0/b/healy-identity.appspot.com/o/polls%2FvAJax5hdbF.json?alt=media&token=48258028-2f77-493d-9e9d-8ca322b3068a',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PollModel.fromJson(_result.data!);

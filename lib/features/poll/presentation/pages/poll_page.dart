@@ -44,6 +44,7 @@ class _PollPageState extends State<PollPage> {
             builder: (context, state) {
               return Scaffold(
                 appBar: AppBar(
+                    centerTitle: true,
                     leading: state.currentStep > 0
                         ? BackButton(
                             color: Colors.black,
@@ -91,7 +92,8 @@ class _PollPageState extends State<PollPage> {
                           return ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(100, 48)),
-                              child: Text('Next',
+                              child: Text(
+                                  state.currentStep == 0 ? "Start" : 'Next',
                                   style: GoogleFonts.openSans(
                                     textStyle:
                                         Theme.of(context).textTheme.headline4,
@@ -119,7 +121,7 @@ class _PollPageState extends State<PollPage> {
     if (currentStep == 0)
       return "Survey";
     else
-      return "Survey $currentStep/${total - 1} ";
+      return "Survey $currentStep/${total - 1}";
   }
 }
 

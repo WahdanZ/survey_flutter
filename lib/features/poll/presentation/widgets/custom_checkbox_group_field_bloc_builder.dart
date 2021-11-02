@@ -114,26 +114,36 @@ class CustomCheckboxGroupFieldBlocBuilder<Value> extends StatelessWidget {
       physics: ClampingScrollPhysics(),
       itemCount: state.items.length,
       itemBuilder: (context, index) {
-        return InputDecorator(
-          decoration: Style.inputDecorationWithoutBorder.copyWith(
-            prefixIcon:
-                controlAffinity == FieldBlocBuilderControlAffinity.leading
-                    ? _buildCheckbox(
-                        context: context,
-                        item: state.items[index],
-                        state: state)
-                    : null,
-            suffixIcon:
-                controlAffinity == FieldBlocBuilderControlAffinity.trailing
-                    ? _buildCheckbox(
-                        context: context,
-                        item: state.items[index],
-                        state: state)
-                    : null,
-          ),
-          child: DefaultFieldBlocBuilderTextStyle(
-            isEnabled: isEnabled,
-            child: Text(itemBuilder(context, state.items.elementAt(index))),
+        return InkWell(
+          onTap: () {
+            final item = state.items[index];
+            if (state.value.contains(item)) {
+              multiSelectFieldBloc.deselect(item);
+            } else {
+              multiSelectFieldBloc.select(item);
+            }
+          },
+          child: InputDecorator(
+            decoration: Style.inputDecorationWithoutBorder.copyWith(
+              prefixIcon:
+                  controlAffinity == FieldBlocBuilderControlAffinity.leading
+                      ? _buildCheckbox(
+                          context: context,
+                          item: state.items[index],
+                          state: state)
+                      : null,
+              suffixIcon:
+                  controlAffinity == FieldBlocBuilderControlAffinity.trailing
+                      ? _buildCheckbox(
+                          context: context,
+                          item: state.items[index],
+                          state: state)
+                      : null,
+            ),
+            child: DefaultFieldBlocBuilderTextStyle(
+              isEnabled: isEnabled,
+              child: Text(itemBuilder(context, state.items.elementAt(index))),
+            ),
           ),
         );
       },

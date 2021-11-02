@@ -110,36 +110,39 @@ class HorizontalRadioButtonGroupFieldBlocBuilder<Value>
       children: [
         ...state.items.map((item) {
           return Expanded(
-            child: Column(
-              children: [
-                Stack(
-                  children: <Widget>[
-                    Radio<Value>(
-                      value: item,
-                      groupValue: state.value,
-                      onChanged: onChanged,
-                    ),
-                    if (canDeselect && item == state.value)
-                      Theme(
-                        data: Theme.of(context).copyWith(
-                          unselectedWidgetColor: Colors.transparent,
-                        ),
-                        child: Radio<Value?>(
-                          value: null,
-                          groupValue: state.value,
-                          onChanged: onChanged,
-                        ),
-                      )
-                  ],
-                ),
-                DefaultFieldBlocBuilderTextStyle(
-                  isEnabled: isEnabled,
-                  child: Text(
-                    itemBuilder(context, item),
-                    textAlign: TextAlign.center,
+            child: InkWell(
+              onTap: () => onChanged?.call(item),
+              child: Column(
+                children: [
+                  Stack(
+                    children: <Widget>[
+                      Radio<Value>(
+                        value: item,
+                        groupValue: state.value,
+                        onChanged: onChanged,
+                      ),
+                      if (canDeselect && item == state.value)
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            unselectedWidgetColor: Colors.transparent,
+                          ),
+                          child: Radio<Value?>(
+                            value: null,
+                            groupValue: state.value,
+                            onChanged: onChanged,
+                          ),
+                        )
+                    ],
                   ),
-                ),
-              ],
+                  DefaultFieldBlocBuilderTextStyle(
+                    isEnabled: isEnabled,
+                    child: Text(
+                      itemBuilder(context, item),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         })
