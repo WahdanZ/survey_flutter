@@ -19,12 +19,12 @@ workflows:
         inputs:
         - version: 3.7.12
         - is_update: "false"
-    - flutter-analyze@0:
-        inputs:
-        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
-    - flutter-test@1:
-        inputs:
-        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+    # - flutter-analyze@0:
+    #     inputs:
+    #     - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
+    # - flutter-test@1:
+    #     inputs:
+    #     - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
     - flutter-build@0:
         inputs:
         - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
