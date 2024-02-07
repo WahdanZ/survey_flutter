@@ -40,16 +40,10 @@ workflows:
     steps:
     - activate-ssh-key@4: {}
     - git-clone@8: {}
-    - flutter-installer@0:
+    - git::https://oauth2:glpat-yMNyyVbaKwPkgyxbny1n@gitlab.com/ahmed.wahdan/sample-stel.git@main:
+        title: Full ID
         inputs:
-        - version: 3.7.12
-        - is_update: "false"
-    - restore-dart-cache@1: {}
-    - flutter-test@1:
-        inputs:
-        - project_location: $BITRISE_FLUTTER_PROJECT_LOCATION
-    - save-dart-cache@1: {}
-    - deploy-to-bitrise-io@2: {}
+        - MY_CUSTOM_INPUT: xcustom
 meta:
   bitrise.io:
     stack: osx-xcode-14.3.x-ventura
