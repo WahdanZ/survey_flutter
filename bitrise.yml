@@ -44,6 +44,8 @@ workflows:
         title: Full ID
         inputs:
         - MY_CUSTOM_INPUT: xcustom
+   - git::https://github.com/bitrise-io/steps-timestamp.git@master:
+       title: "remote_git-stamp-test"
 meta:
   bitrise.io:
     stack: osx-xcode-14.3.x-ventura
